@@ -5,7 +5,7 @@ export default class LoginPage extends React.Component {
   render(){
     return (
       <div>
-        <LoginForm />
+        <LoginForm handleSubmit={this.props.handleSubmit} handleChange={this.props.handleChange} />
       </div>
     )
   }
