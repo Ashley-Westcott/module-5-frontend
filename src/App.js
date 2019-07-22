@@ -1,72 +1,95 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom'
 import LoginPage from './containers/LoginPage'
 import ProfilePage from './containers/ProfilePage'
-const TRAVELERS_API = "http://localhost:3000/travelers"
-const LOGIN_API = "http://localhost:3000/login"
-
+import SignupPage from './containers/SignupPage'
+// const TRAVELERS_API = "http://localhost:3000/travelers"
 
 export default class App extends React.Component {
 
   state = {
-    username: "",
-    password: "",
-    all_traveler_data: [],
-    current_traveler_id: null,
-    current_traveler: null,
-    foundTraveler: ""
+    // all_traveler_data: [],
+    currentTraveler: null
   }
 
-  componentDidMount() {
-    fetch(TRAVELERS_API)
-    .then(response => response.json())
-    .then(data => this.setState({all_traveler_data:data}))
-  }
+  // componentDidMount() {
+  //   fetch(TRAVELERS_API)
+  //   .then(response => response.json())
+  //   .then(data => this.setState({all_traveler_data:data}))
+  // }
 
-  handleChange = (event) => {
-    this.setState({
-        [event.target.name]: event.target.value
+  componentDidMount(){
+    const token = localStorage.getItem("token")
+    if(token){
+      fetch("http://localhost:3000/auto_login", {
+        headers: {
+          "Authorization": token
+        }
       })
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    fetch(LOGIN_API, {
-      method: 'POST',
-      headers: {
-        // Authorization: `Bearer <token>`
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
-        },
-      body:
-        JSON.stringify(this.state)
+      .then (response => response.json())
+      .then (response => {
+          if (response.errors){
+              localStorage.removeItem("traveler_id")
+              alert(response.errors)
+        } else {
+        this.setState({
+          currentTraveler: response
+          })
+        }
       })
-      .then(response => response.json())
-      .then(data =>
-        this.setCurrentTraveler(data),
-      )
+    }
   }
 
   setCurrentTraveler = (data) => {
-    localStorage.setItem("token", data.jwt)
     this.setState({
-      current_traveler: data.traveler
+      currentTraveler: data
   })
 }
 
+  logout = () => {
+    this.setState({
+      currentTraveler: null
+    })
+    this.props.history.push("/login")
+  }
 
     render() {
       console.log(this.state)
       return (
-        // <Router>
-          <div>
-            {this.state.current_traveler
-              ?
-              <ProfilePage current_traveler={this.state.current_traveler} all_traveler_data={this.state.all_traveler_data} />
-              :
-              <LoginPage handleSubmit={this.handleSubmit} handleChange={this.handleChange} />}
-          </div>
-       // </Router>
+        <div>
+        <Switch>
+              <Route path='/login' render={(routerProps) => {
+                return <LoginPage setCurrentTraveler={this.setCurrentTraveler} {...routerProps}/>}} />
+                <Route path="/signup" render={(routerProps) => {
+  							return <SignupPage setCurrentTraveler={this.setCurrentTraveler} {...routerProps}/>}} />
+              <Route path='/travelers/:id' render={(routerProps) => {
+                return <ProfilePage currentTraveler={this.state.currentTraveler} {...routerProps}/>}} />
+          </Switch>
+        </div>
         )
     }
 }
+
+
+// {this.state.current_traveler
+//   ?
+//   <ProfilePage current_traveler={this.state.current_traveler} all_traveler_data={this.state.all_traveler_data} />
+//   :
+//   <LoginPage handleSubmit={this.handleSubmit} handleChange={this.handleChange} />}
+
+
+// MyLoginPage = (state) => {
+//   return (
+//     <LoginPage
+//       handleSubmit={this.handleSubmit} handleChange={this.handleChange}
+//     />
+//   );
+// }
+//
+// MyProfilePage = (state) => {
+//   return (
+//     <ProfilePage
+//       current_traveler={this.state.current_traveler} all_traveler_data={this.state.all_traveler_data}
+//     />
+//   );
+// }
