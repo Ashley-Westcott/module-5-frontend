@@ -23,11 +23,13 @@ export default class App extends React.Component {
       .then (response => {
           if (response.errors){
               localStorage.removeItem("traveler_id")
-              alert(response.errors)
+              alert("auto_login",response.errors)
+              console.log("auto_login",response)
         } else {
         this.setState({
           currentTraveler: response
           })
+
         }
       })
     }
@@ -56,7 +58,7 @@ export default class App extends React.Component {
                 <Route path="/signup" render={(routerProps) => {
   							return <SignupPage setCurrentTraveler={this.setCurrentTraveler} {...routerProps}/>}} />
               <Route path='/travelers/:id' render={(routerProps) => {
-                return <ProfilePage currentTraveler={this.state.currentTraveler} {...routerProps}/>}} />
+                return <ProfilePage currentTraveler={this.state.currentTraveler} logout={this.logout} {...routerProps}/>}} />
           </Switch>
         </div>
         )

@@ -23,9 +23,8 @@ render() {
   //   if (!this.state.trips) {
   //     return (
   //       <img
-  //         alt="loading..."
-  //         className="loader"
-  //         src="https://www.macupdate.com/images/icons256/54019.png"
+  //         alt="loading"
+  //         src="https://cssauthor.com/wp-content/uploads/2018/06/Silver-Balls-Swinging.gif"
   //       />
   //       );
   //     }

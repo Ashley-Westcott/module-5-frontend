@@ -18,7 +18,7 @@ export default class SignupForm extends React.Component {
 		})
 	}
 
-	createUser = () => {
+	createTraveler = () => {
 		fetch("http://localhost:3000/travelers", {
 			method: "POST",
 			headers: {
@@ -33,25 +33,26 @@ export default class SignupForm extends React.Component {
 				alert(response.errors)
 			} else {
 				localStorage.setItem("token", response.token)
-				this.props.setCurrentUser(response.user)
-				this.props.history.push(`/travelers/${response.user.id}`)
+				this.props.setCurrentTraveler(response.traveler)
+				this.props.history.push(`/travelers/${response.traveler.id}`)
 			}
 		})
 	}
 
-	handleSubmit = () => {
+	handleSubmit = (e) => {
+		e.preventDefault()
 		if(this.state.password === this.state.passwordConfirmation){
-			this.createUser()
+			this.createTraveler()
 		} else {
 			alert("Passwords don't match!")
 		}
 	}
 
 	render(){
-      console.log(this.state)
+      console.log("signupform", this.state, this.props)
   		return (
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={e => this.handleSubmit(e)}>
             <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} placeholder='First Name' />
             <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleChange} placeholder='Last Name' />
             <input type="date" name="birthday" value={this.state.birthday} onChange={this.handleChange} placeholder='Birthday' />

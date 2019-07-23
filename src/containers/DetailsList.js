@@ -5,16 +5,24 @@ import Details from '../components/Details'
 export default class DetailsList extends React.Component{
 
   render(){
-    console.log(this.props)
+    console.log("details list",this.props)
     return(
       <div>
-       {this.props.details.map(detail => {return <Details key={detail.id} detail={detail} /> })
+      {this.props.details
+      ?
+      <div>
+          {this.props.details.map(detail => {return <Details key={detail.id} detail={detail} /> })}
+      </div>
+      :
+      <img
+          alt="loading"
+          src="https://cssauthor.com/wp-content/uploads/2018/06/Silver-Balls-Swinging.gif"
+      />
       }
-     </div>
+      </div>
     )
   }
 }
-
 
 
 //   state = {
