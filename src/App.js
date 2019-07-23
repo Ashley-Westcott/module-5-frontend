@@ -3,20 +3,13 @@ import { Switch, Route } from 'react-router-dom'
 import LoginPage from './containers/LoginPage'
 import ProfilePage from './containers/ProfilePage'
 import SignupPage from './containers/SignupPage'
-// const TRAVELERS_API = "http://localhost:3000/travelers"
+
 
 export default class App extends React.Component {
 
   state = {
-    // all_traveler_data: [],
     currentTraveler: null
   }
-
-  // componentDidMount() {
-  //   fetch(TRAVELERS_API)
-  //   .then(response => response.json())
-  //   .then(data => this.setState({all_traveler_data:data}))
-  // }
 
   componentDidMount(){
     const token = localStorage.getItem("token")

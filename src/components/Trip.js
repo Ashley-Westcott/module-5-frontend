@@ -1,5 +1,5 @@
 import React from 'react'
-import TripDetails from './TripDetails'
+import DetailsList from '../containers/DetailsList'
 
 export default class Trip extends React.Component {
   render(){
@@ -7,7 +7,7 @@ export default class Trip extends React.Component {
     return (
       <div>
       {this.props.trip.trip_name}
-      <TripDetails currentTraveler={this.props.currentTraveler} />
+      <DetailsList details={this.props.trip.details} />
       </div>
     )
   }
