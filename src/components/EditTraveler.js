@@ -22,6 +22,7 @@ export default class EditTraveler extends React.Component {
   handleSubmit = (e, traveler_id) => {
     e.preventDefault()
     this.editProfile(traveler_id)
+    this.props.rerender()
     console.log("after reset state", this.state)
   }
 
@@ -43,10 +44,10 @@ export default class EditTraveler extends React.Component {
 			},
 			body: JSON.stringify({firstname: this.state.firstname})
 		})
+    .then (response => response.json())
     .then(this.closeModal())
-    .then(this.props.rerender())
 
-    //   response => response.json())
+
     // .then(data => ("response", console.log(data)))
     // .then(response => console.log('Success:', JSON.stringify(response)))
     // .catch(error => console.error('Error:', error));

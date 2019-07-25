@@ -1,6 +1,7 @@
 
 
 import React from 'react'
+import DeleteDetail from './DeleteDetail'
 
 export default class Details extends React.Component {
   render(){
@@ -12,6 +13,7 @@ export default class Details extends React.Component {
       ?
       <li>
         {this.props.detail.google_maps_info}
+        <DeleteDetail rerender={this.props.rerender} detail={this.props.detail}/>
       </li>
     :
     <img

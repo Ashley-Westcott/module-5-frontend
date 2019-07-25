@@ -10,7 +10,7 @@ export default class DetailsList extends React.Component{
       {this.props.details
       ?
       <div>
-          {this.props.details.map(detail => {return <Details key={detail.id} detail={detail} /> })}
+          {this.props.details.map(detail => {return <Details rerender={this.props.rerender} key={detail.id} detail={detail} /> })}
       </div>
       :
       <img
