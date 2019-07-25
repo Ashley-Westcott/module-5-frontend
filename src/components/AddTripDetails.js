@@ -20,8 +20,7 @@ export default class AddTripDetails extends React.Component {
       body: JSON.stringify(this.state)
     })
     .then(res => res.json())
-    .then((response) => {console.log(response)
-    })
+    .then(this.closeModal())
   }
 
   handleChange = (event) => {
@@ -33,6 +32,7 @@ export default class AddTripDetails extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.addDetail()
+    this.props.rerender()
   }
 
   openModal = () => {

@@ -1,6 +1,5 @@
 import React from 'react'
 import Details from '../components/Details'
-// const TRAVELERS_API = "http://localhost:3000/travelers"
 
 export default class DetailsList extends React.Component{
 

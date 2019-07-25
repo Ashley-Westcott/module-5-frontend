@@ -15,8 +15,8 @@ export default class ProfilePage extends React.Component {
           <div><NavBar currentTraveler={this.props.currentTraveler} logout={this.props.logout}/>
           <img src={this.props.currentTraveler.photo} alt="profile"/>
           <h1>{this.props.currentTraveler.firstname} {this.props.currentTraveler.lastname}'s Trips</h1>
-          <TripList currentTraveler={this.props.currentTraveler}/>
-          <EditTraveler currentTraveler={this.props.currentTraveler} />
+          <TripList rerender={this.props.rerender} currentTraveler={this.props.currentTraveler} />
+          <EditTraveler rerender={this.props.rerender} currentTraveler={this.props.currentTraveler} />
           <DeleteTraveler currentTraveler={this.props.currentTraveler} />
           </div>
           :
