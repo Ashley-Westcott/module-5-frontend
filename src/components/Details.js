@@ -12,11 +12,14 @@ export default class Details extends React.Component {
       <div>
       {this.props.detail
       ?
-      <li>
-        {this.props.detail.google_maps_info}
-        <DeleteDetail rerender={this.props.rerender} detail={this.props.detail}/>
+      <div class="row2">
+      <p class="text-muted mb-4 col-9">
+        {this.props.detail.google_maps_info}</p>
+
         <EditTripDetails rerender={this.props.rerender} detail={this.props.detail}/>
-      </li>
+        <DeleteDetail rerender={this.props.rerender} detail={this.props.detail}/>
+        
+      </div>
     :
     <img
         alt="loading"

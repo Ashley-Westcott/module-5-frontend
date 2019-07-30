@@ -91,27 +91,3 @@ export default class App extends React.Component {
         )
     }
 }
-
-
-// {this.state.current_traveler
-//   ?
-//   <ProfilePage current_traveler={this.state.current_traveler} all_traveler_data={this.state.all_traveler_data} />
-//   :
-//   <LoginPage handleSubmit={this.handleSubmit} handleChange={this.handleChange} />}
-
-
-// MyLoginPage = (state) => {
-//   return (
-//     <LoginPage
-//       handleSubmit={this.handleSubmit} handleChange={this.handleChange}
-//     />
-//   );
-// }
-//
-// MyProfilePage = (state) => {
-//   return (
-//     <ProfilePage
-//       current_traveler={this.state.current_traveler} all_traveler_data={this.state.all_traveler_data}
-//     />
-//   );
-// }

@@ -67,13 +67,39 @@ export default class EditTraveler extends React.Component {
             <div className="content">
               {" "}
               <form onSubmit={(e) => this.handleSubmit(e,this.state.traveler_id)}>
-              <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} placeholder='First Name' />
-              <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleChange} placeholder='Last Name' />
-              <input type="date" name="birthday" value={this.state.birthday} onChange={this.handleChange} placeholder='Birthday' />
-              <input type="text" name="photo" value={this.state.photo} onChange={this.handleChange} placeholder='Photo URL' />
-              <input type="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder='Email Address' />
+              
+              <div class="form-group focused">
+              <label class="form-control-label" for="input-firstname">First Name</label>
+              <input class="form-control form-control-alternative" type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} placeholder='First Name' />
+              </div>
+
+
+              <div class="form-group focused">
+              <label class="form-control-label" for="input-firstname">Last Name</label>
+              <input class="form-control form-control-alternative"
+              type="text" name="lastname" value={this.state.lastname} onChange={this.handleChange} placeholder='Last Name' />
+              </div>
+
+
+              <div class="form-group focused">
+              <label class="form-control-label" for="input-firstname">Birthday</label>
+              <input class="form-control form-control-alternative" type="date" name="birthday" value={this.state.birthday} onChange={this.handleChange} placeholder='Birthday' />
+              </div>
+
+
+              <div class="form-group focused">
+              <label class="form-control-label" for="input-firstname">Photo URL</label>
+              <input class="form-control form-control-alternative" type="text" name="photo" value={this.state.photo} onChange={this.handleChange} placeholder='Photo URL' />
+              </div>
+
+
+              <div class="form-group focused">
+              <label class="form-control-label" for="input-firstname">Email Address</label>
+              <input class="form-control form-control-alternative" type="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder='Email Address' />
+              </div>
+
                 <button
-                    className="button"
+                    class="btn btn-sm btn-default"
                     type="submit"
                   >
                     Edit Traveler

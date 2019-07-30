@@ -10,13 +10,16 @@ export default class NavBar extends React.Component{
 render(){
   return(
     <body>
-    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+    <div class="main-content">
+    <nav class="navbar navbar-top  navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1"><AddNewTrip rerender={this.props.rerender} currentTraveler={this.props.currentTraveler}/></span>
+      <span class="navbar-brand mb-0 h1"></span>
       <button class="btn btn-lg btn-primary btn-login text-uppercase font-weight-bold mb-2" onClick={this.props.logout}>Log Out </button>
       </div>
     </nav>
+    </div>
     <div>
+
         <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" styling="min-height: 600px; background-image: url(https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
               <span class="mask bg-gradient-default opacity-8"></span>
                 <div class="container-fluid d-flex align-items-center">
@@ -83,7 +86,7 @@ render(){
     <h3 class="mb-0">My trips</h3>
     </div>
     <div class="col-4 text-right">
-    <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+    <AddNewTrip rerender={this.props.rerender} currentTraveler={this.props.currentTraveler}/>
     </div>
     </div>
     </div>

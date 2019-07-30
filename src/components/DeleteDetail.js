@@ -15,7 +15,9 @@ export default class DeleteDetail extends React.Component {
   render(){
     console.log("delete detail props", this.props)
     return(
-      <button onClick={event => this.deleteDetail(this.props.detail.id)}>Delete Detail</button>
+      <div class="text-right">
+      <button class="btn btn-sm btn-default" onClick={event => this.deleteDetail(this.props.detail.id)}>Delete</button>
+      </div>
     )
   }
 }

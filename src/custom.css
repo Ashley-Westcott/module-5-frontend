@@ -387,6 +387,18 @@ margin-left: -15px;
 flex-wrap: wrap;
 }
 
+.custombuttonpadding {
+  padding: 0 0 0 0px
+}
+
+.row2 {
+display: flex;
+margin-right: -15px;
+margin-left: 50px;
+flex-wrap: wrap;
+width: 928px;
+}
+
 .col-4,
 .col-8,
 .col,
@@ -739,7 +751,6 @@ box-shadow: none, 0 0 0 0 rgba(23, 43, 77, .5);
 font-size: .875rem;
 line-height: 1.5;
 padding: .25rem .5rem;
-
 }
 
 .dropdown {
@@ -1658,6 +1669,7 @@ font-size: .875rem;
 font-size: .875rem;
 font-weight: 600;
 color: #525f7f;
+text-align: left !important;
 }
 
 .form-control {

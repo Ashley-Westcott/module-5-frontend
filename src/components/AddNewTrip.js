@@ -50,7 +50,7 @@ render(){
 console.log("addnewtrip props", this.props, this.state)
 return (
   <div>
-    <button class="btn btn-lg btn-primary btn-login text-uppercase font-weight-bold mb-2" onClick={this.openModal}>
+    <button class="btn btn-lg btn btn-info" onClick={this.openModal}>
       Add New Trip
     </button>
     <Popup
@@ -66,11 +66,25 @@ return (
         <div className="content">
           {" "}
           <form onSubmit={e => this.handleSubmit(e)}>
-            <input type="text" name="trip_name" value={this.state.trip_name} onChange={this.handleChange} placeholder='Trip Name' />
-            <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleChange} placeholder='Start Date' />
-            <input type="date" name="end_date" value={this.state.end_date} onChange={this.handleChange} placeholder='End Date' />
+            <div class="form-group focused">
+            <label class="form-control-label" for="input-trip-name">Trip Name</label>
+            <input class="form-control form-control-alternative" type="text" name="trip_name" value={this.state.trip_name} onChange={this.handleChange} placeholder='Trip Name' />
+            </div>
+
+            <div class="form-group focused">
+            <label class="form-control-label" for="input-start-date">Start Date</label>
+            <input class="form-control form-control-alternative" type="date" name="start_date" value={this.state.start_date} onChange={this.handleChange} placeholder='Start Date' />
+            </div>
+
+            <div class="form-group focused">
+            <label class="form-control-label" for="input-end-date">End Date</label>
+            <input class="form-control form-control-alternative" type="date" name="end_date" value={this.state.end_date} onChange={this.handleChange} placeholder='End Date' />
+            </div>
                   <div className="actions">
-                  <button className="button" type="submit">
+                  <button
+                  className="button"
+                  class="btn btn-sm btn-default"
+                  type="submit">
                   Create Trip
                   </button>
               </div>

@@ -26,6 +26,7 @@ export default class AddTripDetails extends React.Component {
     })
     .then(res => res.json())
     .then(() => this.props.rerender())
+    .then(() => this.resetForm())
     .then(this.closeModal())
   }
 
@@ -40,6 +41,12 @@ export default class AddTripDetails extends React.Component {
     this.addDetail()
   }
 
+  resetForm = () => {
+    this.setState({
+      google_maps_info: "",
+      notes: ""})
+  }
+
   openModal = () => {
     this.setState({ open: true });
   }
@@ -51,11 +58,13 @@ export default class AddTripDetails extends React.Component {
   render() {
     console.log("edit trip details", this.props, this.state)
     return (
-      <div class="col-4 text-right">
+
       <div className="modalcustom">
+      <div class="col-2 text-right">
         <button className="button" onClick={this.openModal} class="btn btn-sm btn-primary">
           Add Trip Details
         </button>
+        </div>
         <Popup
           open={this.state.open}
           closeOnDocumentClick
@@ -65,14 +74,16 @@ export default class AddTripDetails extends React.Component {
             <a className="close" onClick={this.closeModal}>
               &times;
             </a>
-            <div className="header"> Trip Details </div>
+            <div className="header"> Add Trip Detail </div>
             <div className="content">
               {" "}
               <form onSubmit={e => this.handleSubmit(e)}>
-              <div>
-              <Autocomplete
 
-                  style={{width: '90%'}}
+              <div class="form-group focused">
+              <label class="form-control-label" for="input-google_maps_info">Trip Detail</label>
+              <Autocomplete
+                  class="form-control form-control-alternative"
+                  style={{width: '100%'}}
                   onBlur={(e) => {this.setState({google_maps_info:e.target.value})}}
                   onInput={(e) => {console.log("e input", e.target.value)}}
                   onPlaceSelected={(place) => {this.setState({maps:place.formatted_address})
@@ -83,11 +94,15 @@ export default class AddTripDetails extends React.Component {
 
                   // componentRestrictions={{country: "ru"}}
               />
-              </div>
 
-                <input type="textarea" name="notes" value={this.state.notes} onChange={this.handleChange} placeholder='Notes (optional)' />
+              </div>
+                <div class="form-group focused">
+                <label class="form-control-label" for="input-firstname">Notes</label>
+                <input class="form-control form-control-alternative" type="textarea" name="notes" value={this.state.notes} onChange={this.handleChange} placeholder='Notes (optional)' />
+                </div>
                   <button
                     className="button"
+                    class="btn btn-sm btn-default"
                     type="submit"
                   >
                     Add Detail
@@ -97,7 +112,7 @@ export default class AddTripDetails extends React.Component {
         </div>
         </Popup>
         </div>
-      </div>
+
     );
   }
 }

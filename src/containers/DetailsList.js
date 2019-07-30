@@ -9,8 +9,10 @@ export default class DetailsList extends React.Component{
       <div>
       {this.props.details
       ?
+      <div id={this.props.trip_name} class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
       <div>
           {this.props.details.map(detail => {return <Details rerender={this.props.rerender} key={detail.id} detail={detail} /> })}
+      </div>
       </div>
       :
       <img
