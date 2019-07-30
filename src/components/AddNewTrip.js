@@ -1,5 +1,6 @@
 import React from 'react'
 import Popup from "reactjs-popup";
+import custom from '../custom.css'
 
 export default class AddNewTrip extends React.Component{
 
@@ -22,8 +23,8 @@ createTrip = () => {
     body: JSON.stringify(this.state)
   })
   .then(res => res.json())
-  .then((response) => {console.log(response)
-  })
+  .then(() => this.props.rerender())
+  .then(this.closeModal())
 }
 
 handleChange = (event) => {
@@ -37,34 +38,47 @@ handleSubmit = (e) => {
   this.createTrip()
 }
 
+openModal = () => {
+  this.setState({ open: true });
+}
+
+closeModal = () => {
+  this.setState({ open: false });
+}
+
 render(){
 console.log("addnewtrip props", this.props, this.state)
 return (
   <div>
-    <Popup trigger={<button className="button"> Add New Trip </button>} modal>
-      {close => (
-      <div className="modal"  >
-        <a className="close" onClick={close} position="top right">
+    <button class="btn btn-lg btn-primary btn-login text-uppercase font-weight-bold mb-2" onClick={this.openModal}>
+      Add New Trip
+    </button>
+    <Popup
+      open={this.state.open}
+      closeOnDocumentClick
+      onClose={this.closeModal}
+    >
+      <div className="modalcustom">
+        <a className="close" onClick={this.closeModal}>
           &times;
         </a>
         <div className="header"> New Trip </div>
         <div className="content">
           {" "}
-              <form onSubmit={e => this.handleSubmit(e)}>
-                <input type="text" name="trip_name" value={this.state.trip_name} onChange={this.handleChange} placeholder='Trip Name' />
-                <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleChange} placeholder='Start Date' />
-                <input type="date" name="end_date" value={this.state.end_date} onChange={this.handleChange} placeholder='End Date' />
-                      <div className="actions">
-                      <button className="button" type="submit">
-                      Create Trip
-                      </button>
-                  </div>
-              </form>
+          <form onSubmit={e => this.handleSubmit(e)}>
+            <input type="text" name="trip_name" value={this.state.trip_name} onChange={this.handleChange} placeholder='Trip Name' />
+            <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleChange} placeholder='Start Date' />
+            <input type="date" name="end_date" value={this.state.end_date} onChange={this.handleChange} placeholder='End Date' />
+                  <div className="actions">
+                  <button className="button" type="submit">
+                  Create Trip
+                  </button>
+              </div>
+          </form>
         </div>
     </div>
-  )}
-  </Popup>
-</div>
+    </Popup>
+  </div>
     )
   }
 }

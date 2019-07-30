@@ -1,5 +1,8 @@
 import React from "react";
 import Popup from "reactjs-popup";
+import Autocomplete from 'react-google-autocomplete';
+
+//credit for Autocomplete component - https://github.com/ErrorPro/react-google-autocomplete
 
 export default class AddTripDetails extends React.Component {
 
@@ -7,7 +10,9 @@ export default class AddTripDetails extends React.Component {
     open: false,
     google_maps_info: "",
     notes: "",
-    trip_id: this.props.trip_id
+    trip_id: this.props.trip_id,
+    maps:null,
+    maps2: null
   }
 
   addDetail = () => {
@@ -20,6 +25,7 @@ export default class AddTripDetails extends React.Component {
       body: JSON.stringify(this.state)
     })
     .then(res => res.json())
+    .then(() => this.props.rerender())
     .then(this.closeModal())
   }
 
@@ -32,7 +38,6 @@ export default class AddTripDetails extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.addDetail()
-    this.props.rerender()
   }
 
   openModal = () => {
@@ -46,8 +51,9 @@ export default class AddTripDetails extends React.Component {
   render() {
     console.log("edit trip details", this.props, this.state)
     return (
-      <div>
-        <button className="button" onClick={this.openModal}>
+      <div class="col-4 text-right">
+      <div className="modalcustom">
+        <button className="button" onClick={this.openModal} class="btn btn-sm btn-primary">
           Add Trip Details
         </button>
         <Popup
@@ -55,7 +61,7 @@ export default class AddTripDetails extends React.Component {
           closeOnDocumentClick
           onClose={this.closeModal}
         >
-          <div className="modal">
+          <div className="modalcustom">
             <a className="close" onClick={this.closeModal}>
               &times;
             </a>
@@ -63,7 +69,22 @@ export default class AddTripDetails extends React.Component {
             <div className="content">
               {" "}
               <form onSubmit={e => this.handleSubmit(e)}>
-                <input type="text" name="google_maps_info" value={this.state.google_maps_info} onChange={this.handleChange} placeholder='Detail' />
+              <div>
+              <Autocomplete
+
+                  style={{width: '90%'}}
+                  onBlur={(e) => {this.setState({google_maps_info:e.target.value})}}
+                  onInput={(e) => {console.log("e input", e.target.value)}}
+                  onPlaceSelected={(place) => {this.setState({maps:place.formatted_address})
+                    console.log("place",place);
+                  }}
+                  types={['establishment'&'(cities)']}
+
+
+                  // componentRestrictions={{country: "ru"}}
+              />
+              </div>
+
                 <input type="textarea" name="notes" value={this.state.notes} onChange={this.handleChange} placeholder='Notes (optional)' />
                   <button
                     className="button"
@@ -75,7 +96,14 @@ export default class AddTripDetails extends React.Component {
             </div>
         </div>
         </Popup>
+        </div>
       </div>
     );
   }
 }
+// onInput={(e)=> {this.setState({maps:e.target.value}) }}
+// <input type="text" name="google_maps_info" value={this.state.google_maps_info} onChange={this.handleChange} placeholder='Detail' />
+
+// <input id="autocomplete" placeholder="Enter your address" type="text" onChange={this.handleChange} />
+// <input type="date" name="start_date" value={this.state.start_date} onChange={this.handleChange} placeholder='Start Date' />
+// <input type="date" name="end_date" value={this.state.end_date} onChange={this.handleChange} placeholder='End Date' />

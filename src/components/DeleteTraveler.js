@@ -16,7 +16,7 @@ export default class DeleteTraveler extends React.Component {
 
   render(){
     return(
-      <button onClick={event => this.deleteTraveler(this.props.currentTraveler.id)}>Delete Profile</button>
+      <button class="btn btn-sm btn-default float-center" onClick={event => this.deleteTraveler(this.props.currentTraveler.id)}>Delete Profile</button>
     )
   }
 }

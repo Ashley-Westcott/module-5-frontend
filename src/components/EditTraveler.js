@@ -22,8 +22,7 @@ export default class EditTraveler extends React.Component {
   handleSubmit = (e, traveler_id) => {
     e.preventDefault()
     this.editProfile(traveler_id)
-    this.props.rerender()
-    console.log("after reset state", this.state)
+
   }
 
   openModal = () => {
@@ -35,30 +34,24 @@ export default class EditTraveler extends React.Component {
   }
 
   editProfile = (traveler_id) => {
-
 		fetch(`http://localhost:3000/travelers/${traveler_id}`, {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
 				"Accepts": "application/json",
 			},
-			body: JSON.stringify({firstname: this.state.firstname})
+			body: JSON.stringify(this.state)
 		})
     .then (response => response.json())
+    .then(()=>this.props.rerender())
     .then(this.closeModal())
-
-
-    // .then(data => ("response", console.log(data)))
-    // .then(response => console.log('Success:', JSON.stringify(response)))
-    // .catch(error => console.error('Error:', error));
-
     }
 
   render() {
     console.log("edit traveler profile", "props", this.props, "state", this.state)
     return (
       <div>
-        <button className="button" onClick={this.openModal}>
+        <button className="button" class="btn btn-info" onClick={this.openModal}>
           Edit Profile
         </button>
         <Popup
@@ -66,7 +59,7 @@ export default class EditTraveler extends React.Component {
           closeOnDocumentClick
           onClose={this.closeModal}
         >
-          <div className="modal">
+          <div className="modalcustom">
             <a className="close" onClick={this.closeModal}>
               &times;
             </a>
@@ -93,74 +86,3 @@ export default class EditTraveler extends React.Component {
       );
     }
   }
-
-
-//
-//
-// addDetail = () => {
-//   fetch("http://localhost:3000/details", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Accepts": "application/json",
-//     },
-//     body: JSON.stringify(this.state)
-//   })
-//   .then(res => res.json())
-//   .then((response) => {console.log(response)
-//   })
-// }
-
-
-  // function editThatPokemon(e){
-  // 		// console.log(e.target);
-  // 		// here we're finding the pokemon in the original array that matches
-  // 		// the pokemon we want to edit
-  // 		// we need to change the e.target.id into an integer so we parseInt before
-  // 		// we compare to each of the pokemon's ids
-  // 		let detailToUpdate = pokeArray.find(pokemon => pokemon.id === parseInt(e.target.id))
-  // 		// console.log('foundpoke', foundPoke);
-  // 		// here we're grabbing the index of the foundpoke in the original array
-  // 		// we NEED TO DO THIS BEFORE WE SEND OUR PATCH
-  // 		// so that we can switch the edited pokemon on the DOM
-  // 		// and keep it's place in the array
-  // 		let foundPokeIndex = parseInt(pokeArray.indexOf(foundPoke))
-  // 		// console.log(foundPokeIndex);
-  // 		// here we're going to grab all of the values of the edit form
-  // 		// BUT WE CANNOT DO THIS UNTIL THE FORM IS ADDED TO THE DOM *** //
-  // 		let editPokeName = e.target.parentElement[0].value
-  // 		let editPokeFront = e.target.parentElement[1].value
-  // 		let editPokeBack = e.target.parentElement[2].value
-  // 		// console.log(editPokeName, editPokeFront, editPokeBack);
-  // 		// here we're sending our PATCH request with the edited values
-  // 		fetch(`${pokeURL}/${e.target.id}`, {
-  // 			method: "PATCH",
-  // 			headers: {
-  // 				"Content-Type": "application/json",
-  // 				"Accept": "application/json"
-  // 			},
-  // 			body: JSON.stringify({
-  // 				name: editPokeName,
-  // 				sprites: {
-  // 					front: editPokeFront,
-  // 					back: editPokeBack
-  // 				}
-  // 			})
-  // 		})
-  // 		.then(res => res.json())
-  // 		.then(editedPoke => {
-  // 			// console.log(editedPoke)
-  // 			// here we're going to update our local variable and replace the
-  // 			// original pokemon with your edited pokemon that we got back
-  // 			// from the fetch
-  // 			pokeArray[foundPokeIndex] = editedPoke
-  // 			// console.log(foundPokeIndex)
-  // 			// then we're going to render all of our pokemon on the DOM
-  // 			let newPokeHTML = pokeArray.map(pokemon => {
-  // 				return renderSinglePokemon(pokemon)
-  // 			})
-  // 			// console.log(newPokeHTML)
-  // 			// console.log(pokeContainer)
-  // 			pokeContainer.innerHTML = newPokeHTML.join("")
-  // 		})
-  // 	}

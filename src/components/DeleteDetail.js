@@ -6,10 +6,10 @@ export default class DeleteDetail extends React.Component {
     fetch(`http://localhost:3000/details/${detail_id}`, {
       method: "DELETE",
     })
+
     .then(res => res.json())
     .then(this.props.rerender())
     .then(console.log("this.props after re render", this.props))
-    debugger
   }
 
   render(){

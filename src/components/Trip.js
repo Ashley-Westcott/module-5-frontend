@@ -10,9 +10,8 @@ export default class Trip extends React.Component {
       <div>
       {this.props.trip
       ?
-      <div>
-      {this.props.trip.trip_name}
-
+      <div class="row">
+      <h3 class="heading text-muted mb-4 col-8">{this.props.trip.trip_name}</h3>
       <AddTripDetails rerender={this.props.rerender} currentTraveler={this.props.currentTraveler} trip_id={this.props.trip.id} />
       <DetailsList rerender={this.props.rerender} details={this.props.trip.details} />
       </div>
